@@ -11,24 +11,18 @@ client = Client(account_sid, auth_token)
 databse = pyrebase.initialize_app(keys.config)
 db = databse.database()
 
-template_id = "YOUR_TEMPLATE_ID"
 
-def whatsapp(reply,to , _from="whatsapp:+917708630275"):
+def whatsapp(reply, _from="whatsapp:+18144812393"):
+    global from_
     message = client.messages.create(
         body=reply,
-        to=to,
+        to=from_,
         from_=_from
-    )
+    )    
 
-def send_template_reply(to_number, template, from_number="whatsapp:+917708630275"):
-    print('inside send template')
-    message = client.messages.create(
-        body=template,
-        from_=from_number,
-        to=to_number,
-        template_id=template_id,
-    )
-    return message.sid
+
+global body, from_
+
 
 def reply(body, _from):
     try:
@@ -69,29 +63,41 @@ def reply(body, _from):
 async def webhook(request: Request):
     # Handle the webhook request
     data = await request.form()
-    print(f"data is {data}")
     message_body = data.get("Body")
     message_from = data.get("From")
+    global body, from_
     body = message_body.lower()
     from_ = message_from.lower()
-    ProfileName = data.get("ProfileName")
-    print(f"body is {body} and its from {from_}")
-    if body == "hello":
-        print("inside iff")
-        template = 'Hello {{1}}, thank you for your message.'
-        send_template_reply(from_,  template)
-        # whatsapp(f"Hello {ProfileName}, {{1}}", from_)
-    elif body == "hello":
-        print("inside elif")
-        whatsapp("Hello Welcome to onwords webhook101", from_)
-    elif body == "hell":
-        print("inside elifff")
-        whatsapp("Hell this is onwords webhook101", from_)
+    # message_sid = request.form.get("MessageSid")
+    # message_body = request.form.get("Body")
+    if body == "hoi":
+        whatsapp("Hoi Welcome to Twilio API", "whatsapp:+917708630275 webhook1")
+    elif message_body == "hello":
+        whatsapp("Hello Welcome to onwords webhook1")
+    elif message_body == "hell":
+        whatsapp("Hell this is onwords webhook1")
     else:
-        print("inside else")
-        whatsapp("None of the aboveee webhook101", from_)
+        whatsapp("None of the aboveee webhook1")
+    # reply(message_body.lower(), message_from)
 
+
+@app.post("/webhook2")
+async def webhook2(request: Request):
+    # Handle the webhook request
+    data = await request.form()
+    message_body = data.get("Body")
+    message_from = data.get("From")
+    global body, from_
+    body = message_body.lower()
+    from_ = message_from.lower()
+    # message_sid = request.form.get("MessageSid")
+    # message_body = request.form.get("Body")
+    #reply(message_body.lower(), message_from)
+    if message_body == "hoi":
+        whatsapp("Hai Welcome to Twilio API", "whatsapp:+917708630275")
+    else:
+        whatsapp("message from", "whatsapp:+917708630275")
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=7887, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8182, reload=True)
