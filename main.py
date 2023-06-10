@@ -1,9 +1,14 @@
-from fastapi import FastAPI, Request
-import requests, keys, pyrebase, uvicorn
+from datetime import datetime, timedelta
+from fastapi import BackgroundTasks, FastAPI, Request
+import requests, keys, pyrebase, uvicorn,time
 from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
+from threading import Timer
 
 app = FastAPI()
 
+sessions = {}
+authlist={}
 account_sid = keys.account_sid
 auth_token = keys.auth_token
 client = Client(account_sid, auth_token)
@@ -13,12 +18,20 @@ db = databse.database()
 
 template_id = "YOUR_TEMPLATE_ID"
 
-def whatsapp(reply,to , _from="whatsapp:+917708630275"):
-    message = client.messages.create(
-        body=reply,
-        to=to,
-        from_=_from
-    )
+def send_message(reply,to,_from="whatsapp:+917708630275"):
+    try:
+        client.messages.create(
+            body="",
+            media_url=reply,  
+            to=to,
+            from_=_from
+        )
+    except Exception as e:
+        client.messages.create(
+            body=reply,
+            to=to,
+            from_=_from
+        )
 
 def send_template_reply(to_number, template, from_number="whatsapp:+917708630275"):
     print('inside send template')
@@ -37,34 +50,33 @@ def reply(body, _from):
 
             user = False
         elif userData['name'] == False:
-            whatsapp('May I rembember your name as {}\nreply with "yes" to save your name\n"no" to reenter'.format(body.capitalize()))
+            send_message('May I rembember your name as {}\nreply with "yes" to save your name\n"no" to reenter'.format(body.capitalize()))
             db.child(_from).update({'name': body,'pending':'yes or no'})
         elif userData['pending'] =='yes or no':
             if body == "yes":
-                whatsapp('saving your name as {}'.format(userData['name'].capitalize()))
+                send_message('saving your name as {}'.format(userData['name'].capitalize()))
                 db.child(_from).update({'name': userData['name'],'pending':'none'})
 
             elif body == "no":
-                whatsapp('ok, Please enter your name again')
+                send_message('ok, Please enter your name again')
                 db.child(_from).update({'name': False})
             else:
-                whatsapp('Please reply with yes or no')
+                send_message('Please reply with yes or no')
         else:
             user  =True
     except Exception as e:
        print('errprr is ', e)
-       whatsapp('Can\'t handle the current laod. surver is too busy.\nError code is 12')
+       send_message('Can\'t handle the current laod. surver is too busy.\nError code is 12')
 
 
     if user:
         name = userData['name'].capitalize()
         print(name)
     else:
-        whatsapp('Hey,\nBefore answering that may I know what shall I call you?\nEnter your name:')
+        send_message('Hey,\nBefore answering that may I know what shall I call you?\nEnter your name:')
         db.child(_from).update({'name': False,'firstAskedQuestion':body})
         return
-
-
+    
 @app.post("/webhook")
 async def webhook(request: Request):
     # Handle the webhook request
@@ -75,23 +87,88 @@ async def webhook(request: Request):
     body = message_body.lower()
     from_ = message_from.lower()
     ProfileName = data.get("ProfileName")
-    print(f"body is {body} and its from {from_}")
-    if body == "hello":
-        print("inside iff")
-        template = 'Hello {{1}}, thank you for your message.'
-        send_template_reply(from_,  template)
-        # whatsapp(f"Hello {ProfileName}, {{1}}", from_)
-    elif body == "hello":
-        print("inside elif")
-        whatsapp("Hello Welcome to onwords webhook101", from_)
-    elif body == "hell":
-        print("inside elifff")
-        whatsapp("Hell this is onwords webhook101", from_)
-    else:
-        print("inside else")
-        whatsapp("None of the aboveee webhook101", from_)
+    # print(f"body is {body} and its from {from_}")
+    if message_from in sessions:
+        timer = sessions[message_from]
+        timer.cancel()
 
+    # if body == "hello":
+    #     print("inside iff")
+    #     template = 'Hello {{1}}, thank you for your message.'
+    #     send_template_reply(from_,  template)
 
+    # elif body == "hello":
+    #     print("inside elif")
+    #     send_message("Hello Welcome to onwords webhook101", from_)
 
+    # elif body == "hell":
+    #     print("inside elifff")
+    #     send_message("Hell this is onwords webhook101", from_)
+
+    # elif body =="hey":
+    #     send_message(f"hai {ProfileName}, welcome to my company",from_)
+    
+    if body =="hai" or body =="hi":
+        send_message("Hi There....! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
+        if message_from not in authlist:
+            authlist[message_from] = message_from
+        else:
+            pass
+    if message_from in authlist:
+        if not body == "hai" or body== "hi":      
+            if body == "t":
+                send_message("yes its working",from_)
+            elif body =="existing customer":
+                send_message("Its great to hear. Please let me know that how can I help you",from_)
+                
+            elif body =="new customer":
+                send_message("Let me introduce our services to you, can you lend me a click",from_)
+                
+            elif body =="career":
+                send_message("Share your resume here",from_)
+                
+            elif body =="in need new service":
+                send_message("Share your resume here",from_)
+            
+            elif body =="existing service":
+                send_message("IT Service",from_) 
+                
+            elif body =="smart home solution":
+                print(body)
+                send_message("We have a set of smart solutions to make your home smart",from_)
+                
+            elif body =="it solution":
+                send_message("You have several options and here we go...",from_)
+
+            elif body =="application":
+                send_message("Click your choice",from_)
+
+            elif body =="photo":
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)
+
+            elif body == "website service" or body == "website" or body == "android" or body == "ios" or body == "Designs" or body == "seo" or body == "other service":
+                send_message("Contact us...", from_)
+
+            elif body == "digital marketting":
+                send_message("Click for what do you want", from_)    
+
+            elif body =="automations" or body =="Product" or body =="Other" :
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)
+                send_message("Lend me click to more option!",from_)
+
+            else:
+                send_message("[Oops invalid format,Please type *'Hai'* to got to the wlecome message]", from_)
+        else:
+           pass
+
+    def session_timeout(message_from):
+        try:
+            del authlist[message_from]
+            send_message(f"Your *session* has *timeout* due to inactive on the chennal. Please type *'Hai'* to got to the welcome message", from_)
+        except:
+            send_message(f"Please type *'Hai'* to got to the welcome message", from_)
+    timer = Timer(120, session_timeout,[message_from])
+    timer.start()
+    sessions[message_from] = timer
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=7887, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=1111, reload=True)
