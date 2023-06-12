@@ -128,7 +128,7 @@ async def webhook(request: Request):
                 send_message("Share your resume here",from_)
                 
             elif body =="in need new service":
-                send_message("Share your resume here",from_)
+                send_message("Let me introduce our services to you, can you lend me a click",from_)
             
             elif body =="existing service":
                 send_message("IT Service",from_) 
