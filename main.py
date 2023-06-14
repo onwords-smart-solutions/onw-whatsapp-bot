@@ -32,15 +32,6 @@ def send_message(reply,to,_from="whatsapp:+917708630275"):
             from_=_from
         )
 
-def send_template_reply(to_number, template, from_number="whatsapp:+917708630275"):
-    print('inside send template')
-    message = client.messages.create(
-        body=template,
-        from_=from_number,
-        to=to_number,
-        template_id=template_id,
-    )
-    return message.sid
 
 def reply(body, _from):
     try:
@@ -63,14 +54,12 @@ def reply(body, _from):
                 send_message('Please reply with yes or no')
         else:
             user  =True
-    except Exception as e:
-       print('errprr is ', e)
+    except:
        send_message('Can\'t handle the current laod. surver is too busy.\nError code is 12')
 
 
     if user:
         name = userData['name'].capitalize()
-        print(name)
     else:
         send_message('Hey,\nBefore answering that may I know what shall I call you?\nEnter your name:')
         db.child(_from).update({'name': False,'firstAskedQuestion':body})
@@ -80,7 +69,6 @@ def reply(body, _from):
 async def webhook(request: Request):
     # Handle the webhook request
     data = await request.form()
-    print(f"data is {data}")
     message_body = data.get("Body")
     message_from = data.get("From")
     body = message_body.lower()
@@ -167,5 +155,6 @@ async def webhook(request: Request):
     timer = Timer(120, session_timeout,[message_from])
     timer.start()
     sessions[message_from] = timer
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=1111, reload=True)
