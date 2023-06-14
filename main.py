@@ -16,7 +16,6 @@ client = Client(account_sid, auth_token)
 databse = pyrebase.initialize_app(keys.config)
 db = databse.database()
 
-template_id = "YOUR_TEMPLATE_ID"
 
 def send_message(reply,to,_from="whatsapp:+917708630275"):
     try:
@@ -87,26 +86,9 @@ async def webhook(request: Request):
     body = message_body.lower()
     from_ = message_from.lower()
     ProfileName = data.get("ProfileName")
-    # print(f"body is {body} and its from {from_}")
     if message_from in sessions:
         timer = sessions[message_from]
         timer.cancel()
-
-    # if body == "hello":
-    #     print("inside iff")
-    #     template = 'Hello {{1}}, thank you for your message.'
-    #     send_template_reply(from_,  template)
-
-    # elif body == "hello":
-    #     print("inside elif")
-    #     send_message("Hello Welcome to onwords webhook101", from_)
-
-    # elif body == "hell":
-    #     print("inside elifff")
-    #     send_message("Hell this is onwords webhook101", from_)
-
-    # elif body =="hey":
-    #     send_message(f"hai {ProfileName}, welcome to my company",from_)
     
     if body =="hai" or body =="hi":
         send_message("Hi There....! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
@@ -131,10 +113,14 @@ async def webhook(request: Request):
                 send_message("Let me introduce our services to you, can you lend me a click",from_)
             
             elif body =="existing service":
-                send_message("IT Service",from_) 
-                
+                send_message("IT services",from_)
+                send_message("Click for the smart home services",from_)
+
+            elif body =="smart home service":
+                send_message("Click for the Automation services",from_)
+                send_message("Other services",from_)    
+
             elif body =="smart home solution":
-                print(body)
                 send_message("We have a set of smart solutions to make your home smart",from_)
                 
             elif body =="it solution":
@@ -143,18 +129,29 @@ async def webhook(request: Request):
             elif body =="application":
                 send_message("Click your choice",from_)
 
+            elif body =="digital marketings":
+                send_message("Click the service you want",from_)    
+
             elif body =="photo":
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)
 
-            elif body == "website service" or body == "website" or body == "android" or body == "ios" or body == "Designs" or body == "seo" or body == "other service":
+            elif body == "website service" or body == "website" or body == "security system" or body == "Other service" or body == "product service" or body == "other" or body == "home automations" or body == "gate automations" or body == "android" or body == "ios" or body == "designs" or body == "seo" or body == "other service":
                 send_message("Contact us...", from_)
 
             elif body == "digital marketting":
                 send_message("Click for what do you want", from_)    
+                
+            elif body =="automations":
+                send_message("Click your Automation service", from_)
 
-            elif body =="automations" or body =="Product" or body =="Other" :
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)
-                send_message("Lend me click to more option!",from_)
+            elif body =="Product" or body =="other":
+                send_message("click what type of service you want", from_)
+
+            elif body =="home automation" or body =="gate automation":
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)
+
+            elif body =="security systems" or body =="products" or body =="others":   
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/lock%20clog.pdf"],from_)
 
             else:
                 send_message("[Oops invalid format,Please type *'Hai'* to got to the wlecome message]", from_)
