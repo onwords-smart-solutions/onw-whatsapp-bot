@@ -123,7 +123,7 @@ async def webhook(request: Request):
             elif body =="photo":
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)
 
-            elif body == "website service" or body == "website" or body == "security system" or body == "Other service" or body == "product service" or body == "other" or body == "home automations" or body == "gate automations" or body == "android" or body == "ios" or body == "designs" or body == "seo" or body == "other service":
+            elif body == "website service" or body == "product" or body == "website" or body == "security system" or body == "Other service" or body == "product service" or body == "other" or body == "home automations" or body == "gate automations" or body == "android" or body == "ios" or body == "designs" or body == "seo" or body == "other service":
                 send_message("Contact us...", from_)
 
             elif body == "digital marketting":
