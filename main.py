@@ -85,7 +85,7 @@ async def webhook(request: Request):
         else:
             pass
     if message_from in authlist:
-        if not body == "hai" or body== "hi":      
+        if not body == "hai" or not body== "hi":      
             if body == "t":
                 send_message("yes its working",from_)
             elif body =="existing customer":
@@ -118,10 +118,7 @@ async def webhook(request: Request):
                 send_message("Click your choice",from_)
 
             elif body =="digital marketings":
-                send_message("Click the service you want",from_)    
-
-            elif body =="photo":
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)
+                send_message("Click the service you want",from_)
 
             elif body == "website service" or body == "product" or body == "website" or body == "security system" or body == "Other service" or body == "product service" or body == "other" or body == "home automations" or body == "gate automations" or body == "android" or body == "ios" or body == "designs" or body == "seo" or body == "other service":
                 send_message("Contact us...", from_)
@@ -136,23 +133,25 @@ async def webhook(request: Request):
                 send_message("click what type of service you want", from_)
 
             elif body =="home automation" or body =="gate automation":
+                send_message("Contact us...", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)
 
-            elif body =="security systems" or body =="products" or body =="others":   
+            elif body =="security systems" or body =="products" or body =="others":
+                send_message("Contact us...", from_) 
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/lock%20clog.pdf"],from_)
 
             else:
-                send_message("[Oops invalid format,Please type *'Hai'* to got to the wlecome message]", from_)
+                send_message("Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
         else:
            pass
 
     def session_timeout(message_from):
         try:
             del authlist[message_from]
-            send_message(f"Your *session* has *timeout* due to inactive on the chennal. Please type *'Hai'* to got to the welcome message", from_)
+            send_message(f"Your *session* has *timeout* due to inactive on the chennal. Please type *'Hai'* to go to the welcome message", from_)
         except:
-            send_message(f"Please type *'Hai'* to got to the welcome message", from_)
-    timer = Timer(120, session_timeout,[message_from])
+            send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
+    timer = Timer(300, session_timeout,[message_from])
     timer.start()
     sessions[message_from] = timer
 
