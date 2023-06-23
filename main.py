@@ -140,8 +140,8 @@ async def webhook(request: Request):
                 send_message("Contact us...", from_) 
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/lock%20clog.pdf"],from_)
 
-            else:
-                send_message("Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
+            # else:
+            #     send_message("Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
         else:
            pass
 
@@ -151,7 +151,7 @@ async def webhook(request: Request):
             send_message(f"Your *session* has *timeout* due to inactive on the chennal. Please type *'Hai'* to go to the welcome message", from_)
         except:
             send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
-    timer = Timer(300, session_timeout,[message_from])
+    timer = Timer(900, session_timeout,[message_from])
     timer.start()
     sessions[message_from] = timer
 
