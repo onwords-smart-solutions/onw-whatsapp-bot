@@ -95,53 +95,108 @@ async def webhook(request: Request):
                 send_message("Let me introduce our services to you, can you lend me a click",from_)
                 
             elif body =="career":
-                send_message("Share your resume here",from_)
-                
-            elif body =="in need new service":
-                send_message("Let me introduce our services to you, can you lend me a click",from_)
-            
-            elif body =="existing service":
-                send_message("IT services",from_)
-                send_message("Click for the smart home services",from_)
+                send_message("When it cover to your career, we onwords are the first to identify talents and you are the one",from_)
 
-            elif body =="smart home service":
-                send_message("Click for the Automation services",from_)
-                send_message("Other services",from_)    
+            elif body =="share your resume":
+                send_message("Share your resume to careers@onwords.in",from_)
+
+            # New Customer  ====================================
+
+            # OPEN SMART HOME SOLUTION =============
 
             elif body =="smart home solution":
                 send_message("We have a set of smart solutions to make your home smart",from_)
+
+            elif body =="automations":
+                send_message("Click your Automation service", from_)
+                
+            elif body =="home automation" or body =="gate automation":
+                send_message("Contact us...", from_)
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)    
+
+            elif body =="other":
+                send_message("click what type of service you want", from_)
+
+            elif body =="security systems" or body =="products" or body =="others":
+                send_message("Contact us...", from_) 
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/lock%20clog.pdf"],from_)        
+
+            # OPEN IT SOLUTION
                 
             elif body =="it solution":
                 send_message("You have several options and here we go...",from_)
 
+            # Application ============    
+
             elif body =="application":
-                send_message("Click your choice",from_)
+                send_message("Yes You guessed it right we can build both",from_)
+
+            elif body == "android" or body == "ios":
+                send_message("Take a look at our work and contact us", from_)
+                send_message("Contact us...", from_) 
+                  
+            # Website ===============      
+            elif body == "website":
+                send_message("Contact us...", from_)
+        
+            # Digital marketing ================  
+
+            elif body == "digital marketting":
+                send_message("Promote your brand and get in touch with the Digital World", from_)    
+
+            elif body =="designs service":
+                send_message("Lend me click to designs you want",from_)
+
+            elif body =="poster design" or body == "logo design":
+                send_message("Contact us...",from_)        
+
+            elif body == "seo service" or body == "other services":   
+                send_message("Contact us...", from_)
+
+            # Close NEW CUSTOMER ===================
+
+            # Existing CUSTOMER ====================
+
+            # in need new serice ==================
+            elif body =="in need new service":
+                send_message("Let me introduce our services to you, can you lend me a click",from_)
+
+            elif body =="existing service":
+                send_message("Our  Executives are ready to assist you 24/7 let us know whats on your need..!",from_)
+
+            #IT SERVICE ======================================
+
+            elif body =="it service":
+                send_message("Well you feel into the right mark and choose your service",from_)
+
+            elif body == "website service" or body == "app service":
+                send_message("Contact us...", from_)
 
             elif body =="digital marketings":
                 send_message("Click the service you want",from_)
 
-            elif body == "website service" or body == "product" or body == "website" or body == "security system" or body == "Other service" or body == "product service" or body == "other" or body == "home automations" or body == "gate automations" or body == "android" or body == "ios" or body == "designs" or body == "seo" or body == "other service":
+            elif body =="designs":
+                send_message("Lend me click to design you want",from_)
+
+            elif body =="seo" or body =="other service":
                 send_message("Contact us...", from_)
 
-            elif body == "digital marketting":
-                send_message("Click for what do you want", from_)    
-                
-            elif body =="automations":
-                send_message("Click your Automation service", from_)
+            elif body =="posterdesign service" or body =="logodesign service":
+                send_message("Contact us...", from_)            
 
-            elif body =="Product" or body =="other":
-                send_message("click what type of service you want", from_)
+            # SAMRT HOME SERVICE =================================
 
-            elif body =="home automation" or body =="gate automation":
+            elif body =="smart home service":
+                send_message("As You know we provide a lot of services let me know  which one it is..!(Automations)",from_)
+                send_message("As You know we provide a lot of services let me know  which one it is..!",from_)
+
+            elif body == "home automations" or body == "gate automations":
                 send_message("Contact us...", from_)
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)
 
-            elif body =="security systems" or body =="products" or body =="others":
-                send_message("Contact us...", from_) 
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/lock%20clog.pdf"],from_)
+            elif body == "security system" or body == "product service" or body =="Other service":
+                send_message("Contact us...", from_)  
 
-            # else:
-            #     send_message("Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
+            # Close Existing CUSTOMER ====================
         else:
            pass
 
