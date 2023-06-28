@@ -107,14 +107,14 @@ async def webhook(request: Request):
             elif body =="smart home solution":
                 send_message("We have a set of smart solutions to make your home smart",from_)
 
-            elif body =="automations":
-                send_message("Click your Automation service", from_)
+            # elif body =="automations":
+            #     send_message("Click your Automation service", from_)
                 
             elif body =="home automation" or body =="gate automation":
                 send_message("Contact us...", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)    
 
-            elif body =="other":
+            elif body =="more":
                 send_message("click what type of service you want", from_)
 
             elif body =="security systems" or body =="products" or body =="others":
@@ -162,7 +162,7 @@ async def webhook(request: Request):
                 send_message("Let me introduce our services to you, can you lend me a click",from_)
 
             elif body =="existing service":
-                send_message("Our  Executives are ready to assist you 24/7 let us know whats on your need..!",from_)
+                send_message("Our Executives are ready to assist you 24/7 let us know whats on your need..!",from_)
 
             #IT SERVICE ======================================
 
@@ -187,12 +187,14 @@ async def webhook(request: Request):
             # SAMRT HOME SERVICE =================================
 
             elif body =="smart home service":
-                send_message("As You know we provide a lot of services let me know  which one it is..!(Automations)",from_)
                 send_message("As You know we provide a lot of services let me know  which one it is..!",from_)
 
             elif body == "home automations" or body == "gate automations":
                 send_message("Contact us...", from_)
 
+            elif body=="more..":
+                send_message("As You know we provide a lot of services let me know  which one it is..!!", from_)
+                
             elif body == "security system" or body == "product service" or body =="Other service":
                 send_message("Contact us...", from_)  
 
