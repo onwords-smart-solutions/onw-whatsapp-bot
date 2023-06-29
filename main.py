@@ -120,14 +120,14 @@ async def webhook(request: Request):
                 
             elif body =="home automation" or body =="gate automation":
                 send_message("Contact us...", from_)
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)    
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-GateAutomations.pdf"],from_)    
 
             elif body =="more":
                 send_message("click what type of service you want", from_)
 
             elif body =="security systems" or body =="products" or body =="others":
                 send_message("Contact us...", from_) 
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/lock%20clog.pdf"],from_)        
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)        
 
             # OPEN IT SOLUTION
                 
