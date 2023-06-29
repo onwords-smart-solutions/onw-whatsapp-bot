@@ -152,13 +152,13 @@ async def webhook(request: Request):
             elif body == "digital marketting":
                 send_message("Promote your brand and get in touch with the Digital World", from_)    
 
-            elif body =="designs service":
-                send_message("Lend me click to designs you want",from_)
+            elif body =="More....":
+                send_message("Lend me click for  what services you want...",from_)
 
             elif body =="poster design" or body == "logo design":
                 send_message("Contact us...",from_)        
 
-            elif body == "seo service" or body == "other services":   
+            elif body == "seo services" or body == "other services":   
                 send_message("Contact us...", from_)
 
             # Close NEW CUSTOMER ===================
@@ -183,8 +183,8 @@ async def webhook(request: Request):
             elif body =="digital marketings":
                 send_message("Click the service you want",from_)
 
-            elif body =="designs":
-                send_message("Lend me click to design you want",from_)
+            elif body =="more...":
+                send_message("Lend me click to service you want",from_)
 
             elif body =="seo" or body =="other service":
                 send_message("Contact us...", from_)
@@ -203,7 +203,7 @@ async def webhook(request: Request):
             elif body=="more..":
                 send_message("As You know we provide a lot of services let me know  which one it is..!!", from_)
                 
-            elif body == "security system" or body == "product service" or body =="Other service":
+            elif body == "security system" or body == "product service" or body =="other service":
                 send_message("Contact us...", from_)
 
             elif body == "abcd":
