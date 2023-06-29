@@ -19,20 +19,20 @@ db = databse.database()
 
 def send_message(reply,to,_from="whatsapp:+917708630275"):
     try:
-        client.messages.create(
-                            content_sid=reply,
-                            from_=_from,
-                            content_variables=json.dumps({
-                                '1': 'Name'
-                              }),
-                              to=to
-                          )
         # client.messages.create(
-        #     body="",
-        #     media_url=reply,  
-        #     to=to,
-        #     from_=_from
-        # )
+        #                     content_sid=reply,
+        #                     from_=_from,
+        #                     content_variables=json.dumps({
+        #                         '1': 'Name'
+        #                       }),
+        #                       to=to
+        #                   )
+        client.messages.create(
+            body="",
+            media_url=reply,  
+            to=to,
+            from_=_from
+        )
     except Exception as e:
         client.messages.create(
             body=reply,
@@ -120,7 +120,6 @@ async def webhook(request: Request):
                 
             elif body =="home automation" or body =="gate automation":
                 send_message("Contact us...", from_)
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)  
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)    
 
             elif body =="more":
