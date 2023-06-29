@@ -120,6 +120,7 @@ async def webhook(request: Request):
                 
             elif body =="home automation" or body =="gate automation":
                 send_message("Contact us...", from_)
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/text%20dark.png"],from_)  
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Booklet%20final.pdf"],from_)    
 
             elif body =="more":
@@ -153,7 +154,7 @@ async def webhook(request: Request):
                 send_message("Promote your brand and get in touch with the Digital World", from_)    
 
             elif body =="More....":
-                send_message("Lend me click for  what services you want...",from_)
+                send_message("Lend me click for  what services you want",from_)
 
             elif body =="poster design" or body == "logo design":
                 send_message("Contact us...",from_)        
