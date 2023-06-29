@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from fastapi import BackgroundTasks, FastAPI, Request
-import requests, keys, pyrebase, uvicorn,time
+import requests, keys, pyrebase, uvicorn,time,json
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 from threading import Timer
@@ -20,11 +20,19 @@ db = databse.database()
 def send_message(reply,to,_from="whatsapp:+917708630275"):
     try:
         client.messages.create(
-            body="",
-            media_url=reply,  
-            to=to,
-            from_=_from
-        )
+                            content_sid=reply,
+                            from_=_from,
+                            content_variables=json.dumps({
+                                '1': 'Name'
+                              }),
+                              to=to
+                          )
+        # client.messages.create(
+        #     body="",
+        #     media_url=reply,  
+        #     to=to,
+        #     from_=_from
+        # )
     except Exception as e:
         client.messages.create(
             body=reply,
@@ -196,7 +204,10 @@ async def webhook(request: Request):
                 send_message("As You know we provide a lot of services let me know  which one it is..!!", from_)
                 
             elif body == "security system" or body == "product service" or body =="Other service":
-                send_message("Contact us...", from_)  
+                send_message("Contact us...", from_)
+
+            elif body == "abcd":
+                send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
 
             # Close Existing CUSTOMER ====================
         else:
