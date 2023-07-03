@@ -151,7 +151,7 @@ async def webhook(request: Request):
         
             # Digital marketing ================  
 
-            elif body == "digital marketting":
+            elif body == "digital marketing":
                 send_message("Promote your brand and get in touch with the Digital World", from_)    
 
             elif body =="More....":
@@ -213,7 +213,6 @@ async def webhook(request: Request):
 
             # Close Existing CUSTOMER ====================
             elif not alreadySent:
-                print('inside already sent')
                 send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
         
 
