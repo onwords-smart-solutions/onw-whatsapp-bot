@@ -86,14 +86,14 @@ async def webhook(request: Request):
         timer = sessions[message_from]
         timer.cancel()
     
-    if body =="hai" or body =="hi":
-        send_message("Hi There....! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
+    if body == "hai" or body == "hi":
+        send_message(f"Hi {ProfileName}! Welcome to ONWORDS. I am ONYX , The Personalised assistant for ONWORDS. Let me know something about you,can you lend me a click.", from_)
+        # send_message(f"Hi {ProfileName}! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
         if message_from not in authlist:
             authlist[message_from] = message_from
-        else:
-            pass
+
     if message_from in authlist:
-        if not body == "hai" or not body== "hi":      
+        if not body == "hai" or not body== "hi":
             if body == "t":
                 send_message("yes its working",from_)
             elif body =="existing customer":
@@ -143,7 +143,7 @@ async def webhook(request: Request):
                 send_message("Take a look at our work and contact us", from_)
                 send_message("Contact us...", from_) 
                   
-            # Website ===============      
+            # Website ===============
             elif body == "website":
                 send_message("Contact us...", from_)
         
@@ -210,8 +210,9 @@ async def webhook(request: Request):
                 send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
 
             # Close Existing CUSTOMER ====================
-        else:
-           pass
+            else:
+                send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
+        
 
     def session_timeout(message_from):
         try:
