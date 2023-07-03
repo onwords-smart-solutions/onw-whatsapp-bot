@@ -97,7 +97,7 @@ async def webhook(request: Request):
             if body == "t":
                 send_message("yes its working",from_)
             elif body =="existing customer":
-                send_message("Its great to hear. Please let me know that how can I help you",from_)
+                send_message("Its great to hear.Please let me know that how can i help you",from_)
                 
             elif body =="new customer":
                 send_message("Let me introduce our services to you, can you lend me a click",from_)
