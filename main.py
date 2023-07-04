@@ -91,7 +91,7 @@ async def webhook(request: Request):
         # send_message(f"Hi {ProfileName}! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
         if message_from not in authlist:
             authlist[message_from] = message_from
-            
+
     if message_from in authlist:
         if not body== "hi":
             if body == "t":
@@ -112,13 +112,13 @@ async def webhook(request: Request):
 
             # OPEN SMART HOME SOLUTION =============
 
-            elif body =="smart home solution":
-                send_message("We have a set of smart solutions to make your home smart",from_)
+            elif body =="iot solution":
+                send_message("We have a set of smart solutions to make your home smart!",from_)
 
             # elif body =="automations":
             #     send_message("Click your Automation service", from_)
 
-            elif body =="home automation":
+            elif body =="smart home":
                 send_message("Contact us...", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Smarthome.pdf"],from_)
                 
@@ -198,7 +198,7 @@ async def webhook(request: Request):
 
             # SAMRT HOME SERVICE =================================
 
-            elif body =="smart home service":
+            elif body =="iot service":
                 send_message("As You know we provide a lot of services let me know  which one it is..!",from_)
 
             elif body == "home automations" or body == "gate automations":
