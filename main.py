@@ -156,7 +156,7 @@ async def webhook(request: Request):
             elif body == "digital marketing":
                 send_message("Promote your brand and get in touch with the Digital World", from_)    
 
-            elif body =="More....":
+            elif body =="more....":
                 send_message("Lend me click for  what services you want!",from_)
 
             elif body =="poster design" or body == "logo design":
