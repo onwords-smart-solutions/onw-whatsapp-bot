@@ -4,7 +4,7 @@ import requests, keys, pyrebase, uvicorn,time,json
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 from threading import Timer
-
+import asyncio
 app = FastAPI()
 
 sessions = {}
@@ -15,6 +15,34 @@ client = Client(account_sid, auth_token)
 
 databse = pyrebase.initialize_app(keys.config)
 db = databse.database()
+
+
+async def send_whatsapp_message(to, body, media_url=None):
+    try:
+        upload_task = asyncio.create_task(upload_file(to, media_url))
+
+        message_task = asyncio.create_task(send_message(to, body))
+
+        await asyncio.gather(upload_task, message_task)
+    except Exception as e:
+        print("the error is",e)
+
+async def upload_file(to, media_url, _from="whatsapp:+917708630275"):
+    # Logic to upload the PDF file
+    client.messages.create(
+            body="",
+            media_url=media_url,
+            to=to,
+            from_=_from
+        )
+
+async def send_message(to, reply, _from="whatsapp:+917708630275"):
+    # Logic to send the message
+    client.messages.create(
+            body=reply,
+            to=to,
+            from_=_from
+        )
 
 
 def send_message(reply,to,_from="whatsapp:+917708630275"):
@@ -122,13 +150,14 @@ async def webhook(request: Request):
                 send_message("click what type of service you want", from_)
 
             elif body =="security systems":
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"],from_)
-                send_message("Contact Our PR Team", from_) 
+                # send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"],from_)
+                # send_message("Contact Our PR Team", from_) 
+                await send_whatsapp_message(to=from_,body="Contact Our PR Team", media_url=["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"])
 
             elif body =="products":
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)
-                send_message("Contact Our PR Team", from_) 
-
+                # send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)
+                # send_message("Contact Our PR Team", from_) 
+                await send_whatsapp_message(to=from_,body="Contact Our PR Team", media_url=["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"])
             elif body =="others":
                 send_message("Contact Our PR Team", from_) 
 
