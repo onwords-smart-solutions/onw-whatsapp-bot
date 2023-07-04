@@ -29,8 +29,7 @@ def send_message(reply,to,_from="whatsapp:+917708630275"):
         #                   )
         client.messages.create(
             body="",
-            media=
-            # media_url=reply,  
+            media_url=reply,  
             to=to,
             from_=_from
         )
