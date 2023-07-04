@@ -91,8 +91,7 @@ async def webhook(request: Request):
         # send_message(f"Hi {ProfileName}! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
         if message_from not in authlist:
             authlist[message_from] = message_from
-    else:
-        send_message("Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
+            
     if message_from in authlist:
         if not body== "hi":
             if body == "t":
@@ -220,7 +219,8 @@ async def webhook(request: Request):
         
         # elif not alreadySent:
         #     send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
-
+    else:
+        send_message("Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
     def session_timeout(message_from):
         try:
             del authlist[message_from]
