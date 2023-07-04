@@ -19,53 +19,9 @@ db = databse.database()
 
 def send_message(reply,to,_from="whatsapp:+917708630275"):
     try:
-        # client.messages.create(
-        #                     content_sid=reply,
-        #                     from_=_from,
-        #                     content_variables=json.dumps({
-        #                         '1': 'Name'
-        #                       }),
-        #                       to=to
-        #                   )
         client.messages.create(
             body="",
-            # media_url=reply,
-            media=[
-                        {
-                            "type": "template",
-                            "template": {
-                                "namespace": "your-namespace",
-                                "name": "your-template-name",
-                                "language": {
-                                    "code": "en"
-                                },
-                                "components": [
-                                    {
-                                        "type": "button",
-                                        "sub_type": "quick_reply",
-                                        "index": 0,
-                                        "parameters": [
-                                            {
-                                                "type": "text",
-                                                "text": "Button 1",
-                                                "payload": "button_1"
-                                            },
-                                            {
-                                                "type": "text",
-                                                "text": "Button 2",
-                                                "payload": "button_2"
-                                            },
-                                            {
-                                                "type": "text",
-                                                "text": "Button 3",
-                                                "payload": "button_3"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    ],
+            media_url=reply,
             to=to,
             from_=_from
         )
@@ -155,19 +111,26 @@ async def webhook(request: Request):
             #     send_message("Click your Automation service", from_)
 
             elif body =="smart home":
-                send_message("Contact us...", from_)
+                send_message("Contact Our PR Team", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Smarthome.pdf"],from_)
                 
             elif body =="gate automation":
-                send_message("Contact us...", from_)
+                send_message("Contact Our PR Team", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-GateAutomations.pdf"],from_)    
 
             elif body =="more":
                 send_message("click what type of service you want", from_)
 
-            elif body =="security systems" or body =="products" or body =="others":
-                send_message("Contact us...", from_) 
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)        
+            elif body =="security systems":
+                send_message("Contact Our PR Team", from_) 
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"],from_)
+
+            elif body =="products":
+                send_message("Contact Our PR Team", from_) 
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)
+
+            elif body =="others":
+                send_message("Contact Our PR Team", from_) 
 
             # OPEN IT SOLUTION
                 
@@ -181,11 +144,11 @@ async def webhook(request: Request):
 
             elif body == "android" or body == "ios":
                 send_message("Take a look at our work and contact us", from_)
-                send_message("Contact us...", from_) 
+                send_message("Contact Our PR Team", from_) 
                   
             # Website ===============
             elif body == "website":
-                send_message("Contact us...", from_)
+                send_message("Contact Our PR Team", from_)
         
             # Digital marketing ================  
 
@@ -196,10 +159,10 @@ async def webhook(request: Request):
                 send_message("Lend me click for  what services you want!",from_)
 
             elif body =="poster design" or body == "logo design":
-                send_message("Contact us...",from_)        
+                send_message("Contact Our PR Team",from_)        
 
             elif body == "seo services" or body == "other services":   
-                send_message("Contact us...", from_)
+                send_message("Contact Our PR Team", from_)
 
             # Close NEW CUSTOMER ===================
 
@@ -217,8 +180,11 @@ async def webhook(request: Request):
             elif body =="it service":
                 send_message("Well you feel into the right mark and choose your service",from_)
 
-            elif body == "website service" or body == "app service":
-                send_message("Contact us...", from_)
+            elif body == "website service":
+                send_message("Contact Our Web Team", from_)
+
+            elif body == "app service":
+                send_message("Contact Our App Team", from_)    
 
             elif body =="digital marketings":
                 send_message("Click the service you want",from_)
@@ -226,11 +192,14 @@ async def webhook(request: Request):
             elif body =="more...":
                 send_message("Lend me click to service you want",from_)
 
-            elif body =="seo" or body =="other service":
-                send_message("Contact us...", from_)
+            elif body =="seo":
+                send_message("Contact Our Digital Marketing Team", from_)
+
+            elif body =="other service":
+                send_message("Contact Our PR Team", from_)
 
             elif body =="posterdesign service" or body =="logodesign service":
-                send_message("Contact us...", from_)            
+                send_message("Contact Our Media Team", from_)            
 
             # SAMRT HOME SERVICE =================================
 
@@ -238,13 +207,13 @@ async def webhook(request: Request):
                 send_message("As You know we provide a lot of services let me know  which one it is..!",from_)
 
             elif body == "home automations" or body == "gate automations":
-                send_message("Contact us...", from_)
+                send_message("Contact Our RND Team", from_)
 
             elif body=="more..":
                 send_message("As You know we provide a lot of services let me know  which one it is..!!", from_)
                 
             elif body == "security system" or body == "product service" or body =="other service":
-                send_message("Contact us...", from_)
+                send_message("Contact Our RND Team", from_)
 
             elif body == "abcd":
                 send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
