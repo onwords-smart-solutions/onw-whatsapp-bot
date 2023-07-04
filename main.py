@@ -36,10 +36,10 @@ async def upload_file(to, media_url, _from="whatsapp:+917708630275"):
             from_=_from
         )
 
-async def send_message(to, reply, _from="whatsapp:+917708630275"):
+async def send_message(to, body, _from="whatsapp:+917708630275"):
     # Logic to send the message
     client.messages.create(
-            body=reply,
+            body=body,
             to=to,
             from_=_from
         )
@@ -92,7 +92,7 @@ def reply(body, _from):
         send_message('Hey,\nBefore answering that may I know what shall I call you?\nEnter your name:')
         db.child(_from).update({'name': False,'firstAskedQuestion':body})
         return
-    
+
 @app.post("/webhook")
 async def webhook(request: Request):
     # Handle the webhook request
@@ -105,7 +105,7 @@ async def webhook(request: Request):
     if message_from in sessions:
         timer = sessions[message_from]
         timer.cancel()
-    
+
     if body == "hi":
         send_message(f"Hi {ProfileName}! Welcome to ONWORDS. I am ONYX , The Personalised assistant for ONWORDS. Let me know something about you,can you lend me a click.", from_)
         # send_message(f"Hi {ProfileName}! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
@@ -118,10 +118,10 @@ async def webhook(request: Request):
                 send_message("yes its working",from_)
             elif body =="existing customer":
                 send_message("Its great to hear.Please let me know that how can i help you",from_)
-                
+
             elif body =="new customer":
                 send_message("Let me introduce our services to you, can you lend me a click",from_)
-                
+
             elif body =="career":
                 send_message("When it cover to your career, we onwords are the first to identify talents and you are the one",from_)
 
@@ -152,12 +152,12 @@ async def webhook(request: Request):
             elif body =="security systems":
                 # send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"],from_)
                 # send_message("Contact Our PR Team", from_) 
-                await send_whatsapp_message(to=from_,body="Contact Our PR Team", media_url=["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"])
+                await send_whatsapp_message(to=from_, body="Contact Our PR Team", media_url=["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"])
 
             elif body =="products":
                 # send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)
                 # send_message("Contact Our PR Team", from_) 
-                await send_whatsapp_message(to=from_,body="Contact Our PR Team", media_url=["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"])
+                await send_whatsapp_message(to=from_, body="Contact Our PR Team", media_url=["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"])
             elif body =="others":
                 send_message("Contact Our PR Team", from_) 
 
