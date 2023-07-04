@@ -211,7 +211,8 @@ async def webhook(request: Request):
                 send_message("Contact us...", from_)
 
             elif body == "abcd":
-                send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
+                send_message("HX4cfb92724a0680468803090f6cc76295", from_)
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"], from_)   
 
             # Close Existing CUSTOMER ====================
             else:
