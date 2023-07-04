@@ -218,7 +218,11 @@ async def webhook(request: Request):
 
             # Close Existing CUSTOMER ====================
             elif not alreadySent:
-                send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
+                send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
+        
+        elif not alreadySent:
+            send_message(f"Oooops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
+    
 
     def session_timeout(message_from):
         try:
