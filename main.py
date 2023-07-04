@@ -220,8 +220,8 @@ async def webhook(request: Request):
             elif not alreadySent:
                 send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)   
         
-        elif not alreadySent:
-            send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
+        # elif not alreadySent:
+        #     send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
 
     def session_timeout(message_from):
         try:
