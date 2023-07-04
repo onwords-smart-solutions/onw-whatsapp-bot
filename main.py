@@ -29,7 +29,8 @@ def send_message(reply,to,_from="whatsapp:+917708630275"):
         #                   )
         client.messages.create(
             body="",
-            media_url=reply,  
+            media=reply
+            # media_url=reply,  
             to=to,
             from_=_from
         )
@@ -87,16 +88,16 @@ async def webhook(request: Request):
         timer = sessions[message_from]
         timer.cancel()
     
-    if body == "hai" or body == "hi":
+    if body == "hi":
         send_message(f"Hi {ProfileName}! Welcome to ONWORDS. I am ONYX , The Personalised assistant for ONWORDS. Let me know something about you,can you lend me a click.", from_)
         # send_message(f"Hi {ProfileName}! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
         if message_from not in authlist:
             authlist[message_from] = message_from
         alreadySent = True
     else:
-        send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
+        send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
     if message_from in authlist:
-        if not body == "hai" or not body== "hi":
+        if not body== "hi":
             if body == "t":
                 send_message("yes its working",from_)
             elif body =="existing customer":
@@ -214,22 +215,55 @@ async def webhook(request: Request):
                 send_message("Contact us...", from_)
 
             elif body == "abcd":
-                send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
+                button1={
+                    "type": "template",
+                    "template": {
+                        "namespace": "your-namespace",
+                        "name": "your-template-name",
+                        "language": {
+                            "code": "en"
+                        },
+                        "components": [
+                            {
+                                "type": "button",
+                                "sub_type": "quick_reply",
+                                "index": 0,
+                                "parameters": [
+                                    {
+                                        "type": "text",
+                                        "text": "Button 1",
+                                        "payload": "button_1"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "Button 2",
+                                        "payload": "button_2"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "Button 3",
+                                        "payload": "button_3"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+                send_message(button1, from_)   
 
             # Close Existing CUSTOMER ====================
             elif not alreadySent:
-                send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
+                send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)   
         
         elif not alreadySent:
-            send_message(f"Oooops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
-    
+            send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
 
     def session_timeout(message_from):
         try:
             del authlist[message_from]
-            send_message(f"Your *session* has *timeout* due to inactive on the chennal. Please type *'Hai'* to go to the welcome message", from_)
+            send_message(f"Your *session* has *timeout* due to inactive on the chennal. Please type *'Hi'* to go to the welcome message", from_)
         except:
-            send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
+            send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
     timer = Timer(900, session_timeout,[message_from])
     timer.start()
     sessions[message_from] = timer
