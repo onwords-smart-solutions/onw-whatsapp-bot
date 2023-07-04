@@ -93,7 +93,8 @@ async def webhook(request: Request):
         if message_from not in authlist:
             authlist[message_from] = message_from
         alreadySent = True
-
+    else:
+        send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
     if message_from in authlist:
         if not body == "hai" or not body== "hi":
             if body == "t":
@@ -119,8 +120,12 @@ async def webhook(request: Request):
 
             # elif body =="automations":
             #     send_message("Click your Automation service", from_)
+
+            elif body =="home automation":
+                send_message("Contact us...", from_)
+                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Smarthome.pdf"],from_)
                 
-            elif body =="home automation" or body =="gate automation":
+            elif body =="gate automation":
                 send_message("Contact us...", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-GateAutomations.pdf"],from_)    
 
@@ -213,8 +218,7 @@ async def webhook(request: Request):
 
             # Close Existing CUSTOMER ====================
             elif not alreadySent:
-                send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)     
-        
+                send_message(f"Oops invalid format,Please type *'Hai'* to go to the welcome message", from_)
 
     def session_timeout(message_from):
         try:
