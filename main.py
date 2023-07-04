@@ -111,23 +111,23 @@ async def webhook(request: Request):
             #     send_message("Click your Automation service", from_)
 
             elif body =="smart home":
-                send_message("Contact Our PR Team", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Smarthome.pdf"],from_)
+                send_message("Contact Our PR Team", from_)
                 
             elif body =="gate automation":
-                send_message("Contact Our PR Team", from_)
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-GateAutomations.pdf"],from_)    
+                send_message("Contact Our PR Team", from_)
 
             elif body =="more":
                 send_message("click what type of service you want", from_)
 
             elif body =="security systems":
-                send_message("Contact Our PR Team", from_) 
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"],from_)
+                send_message("Contact Our PR Team", from_) 
 
             elif body =="products":
-                send_message("Contact Our PR Team", from_) 
                 send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-SecuritySystems.pdf"],from_)
+                send_message("Contact Our PR Team", from_) 
 
             elif body =="others":
                 send_message("Contact Our PR Team", from_) 
