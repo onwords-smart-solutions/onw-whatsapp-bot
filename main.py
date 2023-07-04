@@ -75,7 +75,6 @@ def reply(body, _from):
     
 @app.post("/webhook")
 async def webhook(request: Request):
-    alreadySent = False
     # Handle the webhook request
     data = await request.form()
     message_body = data.get("Body")
@@ -92,7 +91,6 @@ async def webhook(request: Request):
         # send_message(f"Hi {ProfileName}! Welcome to *ONWORDS*. I Am *ONYX*.",from_)
         if message_from not in authlist:
             authlist[message_from] = message_from
-        alreadySent = True
     else:
         send_message("Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)
     if message_from in authlist:
@@ -217,7 +215,7 @@ async def webhook(request: Request):
                 send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
 
             # Close Existing CUSTOMER ====================
-            elif not alreadySent:
+            else:
                 send_message(f"Oops invalid format, Please type *'Hi'* to go to the welcome message", from_)   
         
         # elif not alreadySent:
