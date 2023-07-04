@@ -29,7 +29,43 @@ def send_message(reply,to,_from="whatsapp:+917708630275"):
         #                   )
         client.messages.create(
             body="",
-            media_url=reply,  
+            # media_url=reply,
+            media=[
+                        {
+                            "type": "template",
+                            "template": {
+                                "namespace": "your-namespace",
+                                "name": "your-template-name",
+                                "language": {
+                                    "code": "en"
+                                },
+                                "components": [
+                                    {
+                                        "type": "button",
+                                        "sub_type": "quick_reply",
+                                        "index": 0,
+                                        "parameters": [
+                                            {
+                                                "type": "text",
+                                                "text": "Button 1",
+                                                "payload": "button_1"
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": "Button 2",
+                                                "payload": "button_2"
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": "Button 3",
+                                                "payload": "button_3"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
             to=to,
             from_=_from
         )
@@ -211,8 +247,7 @@ async def webhook(request: Request):
                 send_message("Contact us...", from_)
 
             elif body == "abcd":
-                send_message("HX4cfb92724a0680468803090f6cc76295", from_)
-                send_message(["https://sandstorm-chicken-1462.twil.io/assets/Onwords-Ajax_Product.pdf"], from_)   
+                send_message("HX4cfb92724a0680468803090f6cc76295", from_)   
 
             # Close Existing CUSTOMER ====================
             else:
