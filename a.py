@@ -49,9 +49,9 @@ async def read_item(request: Request):
     def session_timeout(From):
         try:
             del authlist[From]
-            send_whatsapp_message(From, "Your *session* has *timeout* due to inactive on the chennal. Please type *'Hi'* to go to the welcome message")
+            send_whatsapp_message(to = From, body = "Your *session* has *timeout* due to inactive on the chennal. Please type *'Hi'* to go to the welcome message")
         except:
-            send_whatsapp_message(From, "Oops invalid format, Please type *'Hi'* to go to the welcome message")
+            send_whatsapp_message(to = From, body = "Oops invalid format, Please type *'Hi'* to go to the welcome message")
     timer = Timer(900, session_timeout,[From])
     timer.start()
     sessions[From] = timer
