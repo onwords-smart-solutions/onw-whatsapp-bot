@@ -16,7 +16,6 @@ client = Client(account_sid, auth_token)
 databse = pyrebase.initialize_app(keys.config)
 db = databse.database()
 
-
 async def send_whatsapp_message(to, body, media_url=None):
     try:
         upload_task = asyncio.create_task(upload_file(to, media_url))
